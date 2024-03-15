@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useCollections = () => {
+const useCollections = (events) => {
     // eslint-disable-next-line no-unused-vars
     const [data, setData] = useState([]);
 
@@ -18,14 +18,16 @@ const useCollections = () => {
 
             const tokensMetadataJson = [];
 
+
             for (let i = 0; i < tokensMetadataResponse.length; i++) {
                 const json = await tokensMetadataResponse[i].json();
                 tokensMetadataJson.push(json);
             }
+            console.log("Fetching=====================>>>>", tokensMetadataJson);
 
             setData(tokensMetadataJson);
         })();
-    }, []);
+    }, [events]);
 
     return data;
 };

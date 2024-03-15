@@ -13,12 +13,14 @@ import { Controller } from "./controllers/ContractController";
 import { useRef } from "react";
 import AllCollections from "./component/AllCollections";
 import MyCollections from "./component/MyCollections";
+import useEvents from "./hooks/useEvents";
 
 configureWeb3Modal();
 
 function App() {
   const inputRef = useRef();
-  const tokensData = useCollections();
+  const events = useEvents();
+  const tokensData = useCollections(events);
   const [[_, ownedTokenIds], myTokensData] = useMyNfts(tokensData);
   const { chainId } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
